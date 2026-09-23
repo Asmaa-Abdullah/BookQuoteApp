@@ -23,7 +23,7 @@ services:
       ASPNETCORE_URLS: http://+:8080
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=bookquote;Username=bookquote_user;Password=${POSTGRES_PASSWORD}
-      Jwt__Key: BookQuoteApp-SuperSecretKey-ChangeThis-InProduction-2026
+      Jwt__Key: ${JWT_KEY}
       Jwt__Issuer: BookQuoteApi
       Jwt__Audience: BookQuoteApp
       Jwt__ExpiresInMinutes: 60
