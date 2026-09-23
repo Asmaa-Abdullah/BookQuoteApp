@@ -1,0 +1,7 @@
+<button [type]="type()" [class]="'btn btn-' + variant()" [disabled]="disabled()">
+  @if (icon()) {
+    <i [class]="icon()" class="me-2"></i>
+  }
+
+  {{ label() }}
+</button>

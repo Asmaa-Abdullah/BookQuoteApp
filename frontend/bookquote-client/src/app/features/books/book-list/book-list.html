@@ -1,0 +1,110 @@
+<div class="mb-4">
+  <div>
+    <h1 class="h2 fw-bold mb-1">Books</h1>
+
+    <p class="text-muted mb-3">Manage your book collection</p>
+  </div>
+
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+    <div class="input-group">
+      <span class="input-group-text bg-primary text-white border-primary">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+
+      <input
+        id="bookSearch"
+        type="search"
+        class="form-control"
+        style="width: 200px"
+        placeholder="Search by book title..."
+        [(ngModel)]="searchTerm"
+        (input)="searchBooks()"
+      />
+    </div>
+
+    <a routerLink="/books/add" class="btn btn-primary text-nowrap">
+      <i class="fa-solid fa-plus me-2"></i>
+      Add Book
+    </a>
+  </div>
+</div>
+
+@if (loading) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary" role="status" aria-label="Loading"></div>
+
+    <p class="text-muted mt-3 mb-0">Loading books...</p>
+  </div>
+} @else if (books.length === 0) {
+  <app-empty-state message="No books available yet." icon="fa-solid fa-book-open"></app-empty-state>
+} @else {
+  <app-card>
+    @if (filteredBooks.length === 0) {
+      <div class="text-center py-5">
+        <i class="fa-solid fa-magnifying-glass fs-1 text-secondary mb-3"></i>
+
+        <p class="text-muted mb-0">No books found matching "{{ searchTerm }}".</p>
+      </div>
+    } @else {
+      <app-table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Date</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (book of filteredBooks; track book.id) {
+            <tr>
+              <td class="fw-semibold">
+                {{ book.title }}
+              </td>
+
+              <td>
+                {{ book.author }}
+              </td>
+
+              <td>
+                {{ book.publicationDate | date: 'mediumDate' }}
+              </td>
+
+              <td>
+                <div class="d-flex justify-content-end gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-primary"
+                    title="Edit"
+                    (click)="editBook(book.id)"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-danger"
+                    title="Delete"
+                    (click)="deleteBook(book)"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </app-table>
+    }
+  </app-card>
+}
+
+@if (showDeleteDialog && bookToDelete) {
+  <app-confirm-dialog
+    title="Delete Book"
+    [message]="'Are you sure you want to delete &quot;' + bookToDelete.title + '&quot;?'"
+    (confirmed)="confirmDelete()"
+    (cancelled)="closeDeleteDialog()"
+  ></app-confirm-dialog>
+}

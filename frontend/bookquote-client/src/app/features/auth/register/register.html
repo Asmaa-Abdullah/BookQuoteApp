@@ -1,0 +1,81 @@
+<div class="container min-vh-100 d-flex align-items-center py-5">
+  <div class="row justify-content-center w-100">
+    <div class="col-12 col-sm-10 col-md-7 col-lg-5 col-xl-4">
+      <div class="text-center mb-4">
+        <i class="fa-solid fa-book-open fa-3x text-primary mb-3"></i>
+
+        <h1 class="h2 fw-bold mb-2">BookQuote</h1>
+
+        <p class="text-muted mb-0">Create your account</p>
+      </div>
+
+      <app-card>
+        <h2 class="h4 text-center mb-4">Create Account</h2>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="username" class="form-label fw-semibold"> Username </label>
+
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-user"></i>
+              </span>
+
+              <input
+                id="username"
+                type="text"
+                class="form-control"
+                formControlName="username"
+                placeholder="Choose a username"
+                autocomplete="username"
+              />
+            </div>
+
+            @if (registerForm.controls.username.touched && registerForm.controls.username.invalid) {
+              <div class="text-danger small mt-1">Username is required.</div>
+            }
+          </div>
+
+          <div class="mb-4">
+            <label for="password" class="form-label fw-semibold"> Password </label>
+
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                formControlName="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+              />
+            </div>
+
+            @if (registerForm.controls.password.touched && registerForm.controls.password.invalid) {
+              <div class="text-danger small mt-1">Password is required.</div>
+            }
+          </div>
+
+          <div class="d-grid">
+            <app-button
+              type="submit"
+              label="Create Account"
+              variant="primary"
+              icon="fa-solid fa-user-plus"
+              [disabled]="registerForm.invalid"
+            ></app-button>
+          </div>
+        </form>
+
+        <div class="text-center mt-4 pt-3 border-top">
+          <p class="text-muted mb-2">Already have an account?</p>
+
+          <a routerLink="/login" class="text-decoration-none fw-semibold"> Login </a>
+        </div>
+      </app-card>
+    </div>
+  </div>
+</div>

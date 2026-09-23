@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: bookquote-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bookquote
+      POSTGRES_USER: bookquote_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - bookquote_postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ../../backend/BookQuoteApi
+    container_name: bookquote-api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=bookquote;Username=bookquote_user;Password=${POSTGRES_PASSWORD}
+      Jwt__Key: BookQuoteApp-SuperSecretKey-ChangeThis-InProduction-2026
+      Jwt__Issuer: BookQuoteApi
+      Jwt__Audience: BookQuoteApp
+      Jwt__ExpiresInMinutes: 60
+    ports:
+      - "5118:8080"
+
+  frontend:
+    build:
+      context: ../../frontend/bookquote-client
+    container_name: bookquote-frontend
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "4200:80"
+volumes:
+  bookquote_postgres_data:

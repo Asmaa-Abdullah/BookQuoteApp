@@ -1,0 +1,8 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-card',
+  standalone: true,
+  templateUrl: './app-card.html',
+})
+export class AppCardComponent {}

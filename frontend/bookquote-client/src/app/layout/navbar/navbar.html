@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/books">
+      <i class="fa-solid fa-book-open text-primary"></i>
+      <span>BookQuote</span>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/books" routerLinkActive="active">
+            <i class="fa-solid fa-book me-1"></i>
+            Books
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/quotes" routerLinkActive="active">
+            <i class="fa-solid fa-quote-left me-1"></i>
+            Mina citat
+          </a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-2">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+          [title]="isDarkMode ? 'Light mode' : 'Dark mode'"
+        >
+          <i class="fa-solid" [class.fa-sun]="isDarkMode" [class.fa-moon]="!isDarkMode"></i>
+        </button>
+
+        <button type="button" class="btn btn-outline-danger" (click)="logout()">
+          <i class="fa-solid fa-right-from-bracket me-1"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
