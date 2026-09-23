@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:5118/api',
+  apiUrl: 'https://bookquoteapp-zk7k.onrender.com/api',
 };
