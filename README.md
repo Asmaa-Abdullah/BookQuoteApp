@@ -109,12 +109,16 @@ BookQuoteApp/
 ├── .gitignore
 └── README.md
 
+---
+
 Testing
+
 Run backend tests:
 cd backend
 dotnet test
 Build the Angular application:
 cd frontend/bookquote-client
 ng build
+
 Live Demo
-Application: <LIVE_APP_URL>
+Application: https://bookquote-frontend-uexb.onrender.com
