@@ -94,6 +94,8 @@ Make sure PostgreSQL is running and the database connection is configured correc
 ---
 
 Project Structure
+
+```text
 BookQuoteApp/
 ├── backend/
 │ ├── BookQuoteApi/
@@ -108,7 +110,7 @@ BookQuoteApp/
 │
 ├── .gitignore
 └── README.md
-
+```
 ---
 
 Testing
